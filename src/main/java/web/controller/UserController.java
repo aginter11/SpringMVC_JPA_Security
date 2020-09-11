@@ -16,6 +16,7 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public String listUsers(ModelMap model) {
+        model.addAttribute("user", new User());
         model.addAttribute("listUsers", userService.listUsers());
         return "users";
     }
@@ -26,10 +27,9 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String removeUser(@PathVariable("id") int id) {
         userService.removeUser(id);
-
         return "redirect:/users";
     }
 
@@ -52,10 +52,4 @@ public class UserController {
         return "editPage";
     }
 
-    @RequestMapping("userdata/{id}")
-    public String userData(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.getUserbyId(id));
-
-        return "userdata";
-    }
 }
