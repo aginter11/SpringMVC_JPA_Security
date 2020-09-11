@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../:\JM Pre-project IDEA\2.3.1 MVC_Hibernate_CRUD\2.3.1 MVC_Hibernate_CRUD\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
