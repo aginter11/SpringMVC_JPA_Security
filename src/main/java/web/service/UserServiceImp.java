@@ -38,18 +38,17 @@ public class UserServiceImp implements UserService {
 
     }
 
-    @Transactional
+
     @Override
     public User getUserbyId(int id) {
         return userDao.getUserbyId(id);
     }
 
-    @Transactional
+
     @Override
     public List<User> listUsers() {
         return userDao.listUsers();
     }
-
 
 
 }
