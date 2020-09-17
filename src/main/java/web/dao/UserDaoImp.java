@@ -6,6 +6,7 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -48,4 +49,13 @@ public class UserDaoImp implements UserDao {
 
         return entityManager.createQuery("SELECT u from User u").getResultList();
     }
+
+    @Override
+    public User getUserByName(String name) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u from User u where u.name =?1",User.class);
+        return query.setParameter(1, name).getSingleResult();
+
+    }
+
+
 }

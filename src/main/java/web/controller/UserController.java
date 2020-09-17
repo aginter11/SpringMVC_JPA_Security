@@ -2,10 +2,8 @@ package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import web.model.User;
 import web.service.UserService;
 
@@ -14,29 +12,35 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/")
+    public String getMainPage(ModelMap model) {
+        return "index";
+    }
+
+
+    @GetMapping(value = "/admin")
     public String listUsers(ModelMap model) {
         model.addAttribute("user", new User());
         model.addAttribute("listUsers", userService.listUsers());
-        return "users";
+        return "admin";
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/admin/add")
     public String addUser(@ModelAttribute("user") User user) {
         userService.add(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/remove/{id}")
+    @GetMapping("admin/remove/{id}")
     public String removeUser(@PathVariable("id") int id) {
         userService.removeUser(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/admin/edit")
     public String editUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
     @GetMapping("/add")
@@ -45,11 +49,16 @@ public class UserController {
         return "addPage";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("admin/edit/{id}")
     public String editPage(@PathVariable("id") int id, ModelMap model) {
         User user = userService.getUserbyId(id);
         model.addAttribute("user", user);
         return "editPage";
+    }
+
+    @GetMapping("/user")
+    public String userPage(){
+        return "user";
     }
 
 }
